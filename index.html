@@ -1,0 +1,1092 @@
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>AI效率局 · AI工具导航</title>  
+    <meta name="description" content="精选200+AI工具，帮你找到最好用的AI工具。由AI效率局出品。">  
+    <style>  
+        /* ===== 基础重置 ===== */  
+        * {  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+        }  
+  
+        body {  
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;  
+            background: #0a0a0f;  
+            color: #e2e8f0;  
+            min-height: 100vh;  
+            overflow-x: hidden;  
+        }  
+  
+        /* ===== 动态背景 ===== */  
+        .bg-grid {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            background-image:   
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),  
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);  
+            background-size: 60px 60px;  
+            z-index: 0;  
+        }  
+  
+        .bg-glow {  
+            position: fixed;  
+            top: -200px;  
+            left: 50%;  
+            transform: translateX(-50%);  
+            width: 800px;  
+            height: 600px;  
+            background: radial-gradient(ellipse, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 40%, transparent 70%);  
+            z-index: 0;  
+            pointer-events: none;  
+        }  
+  
+        /* ===== 主容器 ===== */  
+        .container {  
+            position: relative;  
+            z-index: 1;  
+            max-width: 1200px;  
+            margin: 0 auto;  
+            padding: 0 20px;  
+        }  
+  
+        /* ===== 头部 ===== */  
+        header {  
+            text-align: center;  
+            padding: 60px 0 40px;  
+        }  
+  
+        .logo {  
+            display: inline-flex;  
+            align-items: center;  
+            gap: 12px;  
+            margin-bottom: 16px;  
+        }  
+  
+        .logo-icon {  
+            width: 48px;  
+            height: 48px;  
+            background: linear-gradient(135deg, #6366f1, #a855f7);  
+            border-radius: 14px;  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            font-size: 24px;  
+            font-weight: 800;  
+            color: white;  
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);  
+        }  
+  
+        .logo-text {  
+            font-size: 28px;  
+            font-weight: 800;  
+            background: linear-gradient(135deg, #c7d2fe, #e9d5ff);  
+            -webkit-background-clip: text;  
+            -webkit-text-fill-color: transparent;  
+            background-clip: text;  
+        }  
+  
+        .subtitle {  
+            color: #94a3b8;  
+            font-size: 16px;  
+            margin-bottom: 32px;  
+        }  
+  
+        .subtitle span {  
+            color: #a78bfa;  
+        }  
+  
+        /* ===== 搜索栏 ===== */  
+        .search-wrapper {  
+            max-width: 560px;  
+            margin: 0 auto 20px;  
+            position: relative;  
+        }  
+  
+        .search-input {  
+            width: 100%;  
+            padding: 16px 20px 16px 50px;  
+            background: rgba(30, 41, 59, 0.8);  
+            border: 1px solid rgba(99, 102, 241, 0.2);  
+            border-radius: 16px;  
+            color: #e2e8f0;  
+            font-size: 16px;  
+            outline: none;  
+            transition: all 0.3s;  
+            backdrop-filter: blur(10px);  
+        }  
+  
+        .search-input:focus {  
+            border-color: #6366f1;  
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), 0 0 20px rgba(99, 102, 241, 0.1);  
+        }  
+  
+        .search-input::placeholder {  
+            color: #64748b;  
+        }  
+  
+        .search-icon {  
+            position: absolute;  
+            left: 18px;  
+            top: 50%;  
+            transform: translateY(-50%);  
+            font-size: 18px;  
+            color: #64748b;  
+        }  
+  
+        .stats {  
+            text-align: center;  
+            color: #64748b;  
+            font-size: 13px;  
+            margin-bottom: 40px;  
+        }  
+  
+        .stats strong {  
+            color: #a78bfa;  
+        }  
+  
+        /* ===== 分类标签 ===== */  
+        .categories {  
+            display: flex;  
+            flex-wrap: wrap;  
+            gap: 10px;  
+            justify-content: center;  
+            margin-bottom: 40px;  
+            padding: 0 10px;  
+        }  
+  
+        .cat-btn {  
+            padding: 8px 20px;  
+            border-radius: 100px;  
+            border: 1px solid rgba(255, 255, 255, 0.08);  
+            background: rgba(30, 41, 59, 0.5);  
+            color: #94a3b8;  
+            cursor: pointer;  
+            font-size: 14px;  
+            transition: all 0.3s;  
+            backdrop-filter: blur(10px);  
+            user-select: none;  
+        }  
+  
+        .cat-btn:hover {  
+            border-color: rgba(99, 102, 241, 0.3);  
+            color: #c7d2fe;  
+            transform: translateY(-1px);  
+        }  
+  
+        .cat-btn.active {  
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);  
+            color: white;  
+            border-color: transparent;  
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);  
+        }  
+  
+        /* ===== 工具卡片网格 ===== */  
+        .tools-grid {  
+            display: grid;  
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+            gap: 20px;  
+            margin-bottom: 60px;  
+        }  
+  
+        .tool-card {  
+            background: rgba(30, 41, 59, 0.5);  
+            border: 1px solid rgba(255, 255, 255, 0.06);  
+            border-radius: 20px;  
+            padding: 24px;  
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  
+            backdrop-filter: blur(10px);  
+            cursor: pointer;  
+            position: relative;  
+            overflow: hidden;  
+        }  
+  
+        .tool-card::before {  
+            content: '';  
+            position: absolute;  
+            top: 0;  
+            left: 0;  
+            right: 0;  
+            height: 2px;  
+            background: linear-gradient(90deg, transparent, #6366f1, transparent);  
+            opacity: 0;  
+            transition: opacity 0.3s;  
+        }  
+  
+        .tool-card:hover {  
+            border-color: rgba(99, 102, 241, 0.2);  
+            transform: translateY(-4px);  
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(99, 102, 241, 0.05);  
+        }  
+  
+        .tool-card:hover::before {  
+            opacity: 1;  
+        }  
+  
+        .tool-header {  
+            display: flex;  
+            align-items: center;  
+            gap: 14px;  
+            margin-bottom: 14px;  
+        }  
+  
+        .tool-emoji {  
+            width: 48px;  
+            height: 48px;  
+            border-radius: 14px;  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            font-size: 24px;  
+            flex-shrink: 0;  
+        }  
+  
+        .tool-name {  
+            font-size: 17px;  
+            font-weight: 700;  
+            color: #f1f5f9;  
+        }  
+  
+        .tool-tag {  
+            display: inline-block;  
+            padding: 3px 10px;  
+            border-radius: 100px;  
+            font-size: 11px;  
+            margin-top: 4px;  
+            font-weight: 500;  
+        }  
+  
+        .tool-desc {  
+            color: #94a3b8;  
+            font-size: 14px;  
+            line-height: 1.6;  
+            margin-bottom: 16px;  
+            display: -webkit-box;  
+            -webkit-line-clamp: 2;  
+            -webkit-box-orient: vertical;  
+            overflow: hidden;  
+        }  
+  
+        .tool-footer {  
+            display: flex;  
+            align-items: center;  
+            justify-content: space-between;  
+        }  
+  
+        .tool-badges {  
+            display: flex;  
+            gap: 8px;  
+        }  
+  
+        .badge {  
+            padding: 4px 10px;  
+            border-radius: 8px;  
+            font-size: 11px;  
+            background: rgba(99, 102, 241, 0.1);  
+            color: #a5b4fc;  
+        }  
+  
+        .badge.free {  
+            background: rgba(34, 197, 94, 0.1);  
+            color: #4ade80;  
+        }  
+  
+        .badge.china {  
+            background: rgba(251, 191, 36, 0.1);  
+            color: #fbbf24;  
+        }  
+  
+        .visit-btn {  
+            padding: 6px 16px;  
+            border-radius: 10px;  
+            background: rgba(99, 102, 241, 0.15);  
+            color: #a5b4fc;  
+            font-size: 12px;  
+            text-decoration: none;  
+            transition: all 0.3s;  
+            border: none;  
+            cursor: pointer;  
+        }  
+  
+        .visit-btn:hover {  
+            background: #6366f1;  
+            color: white;  
+        }  
+  
+        /* ===== 分类颜色 ===== */  
+        .bg-chat { background: rgba(99, 102, 241, 0.12); }  
+        .bg-image { background: rgba(236, 72, 153, 0.12); }  
+        .bg-video { background: rgba(168, 85, 247, 0.12); }  
+        .bg-write { background: rgba(34, 211, 238, 0.12); }  
+        .bg-code { background: rgba(34, 197, 94, 0.12); }  
+        .bg-office { background: rgba(251, 191, 36, 0.12); }  
+        .bg-music { background: rgba(244, 63, 94, 0.12); }  
+        .bg-design { background: rgba(251, 146, 60, 0.12); }  
+        .bg-search { background: rgba(45, 212, 191, 0.12); }  
+  
+        .tag-chat { background: rgba(99, 102, 241, 0.15); color: #818cf8; }  
+        .tag-image { background: rgba(236, 72, 153, 0.15); color: #f472b6; }  
+        .tag-video { background: rgba(168, 85, 247, 0.15); color: #c084fc; }  
+        .tag-write { background: rgba(34, 211, 238, 0.15); color: #22d3ee; }  
+        .tag-code { background: rgba(34, 197, 94, 0.15); color: #4ade80; }  
+        .tag-office { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }  
+        .tag-music { background: rgba(244, 63, 94, 0.15); color: #fb7185; }  
+        .tag-design { background: rgba(251, 146, 60, 0.15); color: #fb923c; }  
+        .tag-search { background: rgba(45, 212, 191, 0.15); color: #2dd4bf; }  
+  
+        /* ===== 无结果 ===== */  
+        .no-results {  
+            text-align: center;  
+            padding: 60px 20px;  
+            color: #64748b;  
+            display: none;  
+        }  
+  
+        .no-results .emoji {  
+            font-size: 48px;  
+            margin-bottom: 16px;  
+        }  
+  
+        /* ===== 页脚 ===== */  
+        footer {  
+            text-align: center;  
+            padding: 40px 0;  
+            border-top: 1px solid rgba(255, 255, 255, 0.05);  
+            color: #475569;  
+            font-size: 13px;  
+        }  
+  
+        footer a {  
+            color: #6366f1;  
+            text-decoration: none;  
+        }  
+  
+        footer a:hover {  
+            text-decoration: underline;  
+        }  
+  
+        .footer-links {  
+            display: flex;  
+            justify-content: center;  
+            gap: 24px;  
+            margin-bottom: 16px;  
+        }  
+  
+        /* ===== 回到顶部 ===== */  
+        .back-top {  
+            position: fixed;  
+            bottom: 30px;  
+            right: 30px;  
+            width: 44px;  
+            height: 44px;  
+            border-radius: 14px;  
+            background: rgba(99, 102, 241, 0.9);  
+            color: white;  
+            border: none;  
+            cursor: pointer;  
+            font-size: 18px;  
+            display: none;  
+            align-items: center;  
+            justify-content: center;  
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);  
+            transition: all 0.3s;  
+            z-index: 100;  
+        }  
+  
+        .back-top:hover {  
+            transform: translateY(-2px);  
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);  
+        }  
+  
+        /* ===== 响应式 ===== */  
+        @media (max-width: 768px) {  
+            header {  
+                padding: 40px 0 30px;  
+            }  
+  
+            .logo-text {  
+                font-size: 22px;  
+            }  
+  
+            .subtitle {  
+                font-size: 14px;  
+            }  
+  
+            .tools-grid {  
+                grid-template-columns: 1fr;  
+                gap: 14px;  
+            }  
+  
+            .categories {  
+                gap: 8px;  
+            }  
+  
+            .cat-btn {  
+                padding: 6px 16px;  
+                font-size: 13px;  
+            }  
+  
+            .tool-card {  
+                padding: 20px;  
+            }  
+        }  
+  
+        /* ===== 动画 ===== */  
+        @keyframes fadeInUp {  
+            from {  
+                opacity: 0;  
+                transform: translateY(20px);  
+            }  
+            to {  
+                opacity: 1;  
+                transform: translateY(0);  
+            }  
+        }  
+  
+        .tool-card {  
+            animation: fadeInUp 0.5s ease forwards;  
+        }  
+  
+        .tool-card:nth-child(1) { animation-delay: 0.02s; }  
+        .tool-card:nth-child(2) { animation-delay: 0.04s; }  
+        .tool-card:nth-child(3) { animation-delay: 0.06s; }  
+        .tool-card:nth-child(4) { animation-delay: 0.08s; }  
+        .tool-card:nth-child(5) { animation-delay: 0.10s; }  
+        .tool-card:nth-child(6) { animation-delay: 0.12s; }  
+        .tool-card:nth-child(7) { animation-delay: 0.14s; }  
+        .tool-card:nth-child(8) { animation-delay: 0.16s; }  
+        .tool-card:nth-child(9) { animation-delay: 0.18s; }  
+        .tool-card:nth-child(10) { animation-delay: 0.20s; }  
+        .tool-card:nth-child(11) { animation-delay: 0.22s; }  
+        .tool-card:nth-child(12) { animation-delay: 0.24s; }  
+    </style>  
+</head>  
+<body>  
+    <div class="bg-grid"></div>  
+    <div class="bg-glow"></div>  
+  
+    <div class="container">  
+        <!-- 头部 -->  
+        <header>  
+            <div class="logo">  
+                <div class="logo-icon">AI</div>  
+                <span class="logo-text">AI效率局 · 工具导航</span>  
+            </div>  
+            <p class="subtitle">精选 <span>200+</span> AI工具，我替你试错，你只管提效</p>  
+              
+            <div class="search-wrapper">  
+                <span class="search-icon">🔍</span>  
+                <input type="text" class="search-input" id="searchInput" placeholder="搜索AI工具名称、功能或关键词...">  
+            </div>  
+            <p class="stats">已收录 <strong id="toolCount">0</strong> 个精选AI工具 · 每周更新</p>  
+        </header>  
+  
+        <!-- 分类标签 -->  
+        <div class="categories" id="categories">  
+            <button class="cat-btn active" data-category="all">🏠 全部</button>  
+            <button class="cat-btn" data-category="chat">💬 AI对话</button>  
+            <button class="cat-btn" data-category="image">🎨 AI绘画</button>  
+            <button class="cat-btn" data-category="video">🎬 AI视频</button>  
+            <button class="cat-btn" data-category="write">✍️ AI写作</button>  
+            <button class="cat-btn" data-category="code">💻 AI编程</button>  
+            <button class="cat-btn" data-category="office">📊 AI办公</button>  
+            <button class="cat-btn" data-category="search">🔍 AI搜索</button>  
+            <button class="cat-btn" data-category="design">🎯 AI设计</button>  
+            <button class="cat-btn" data-category="music">🎵 AI音乐</button>  
+        </div>  
+  
+        <!-- 工具卡片 -->  
+        <div class="tools-grid" id="toolsGrid"></div>  
+  
+        <!-- 无结果提示 -->  
+        <div class="no-results" id="noResults">  
+            <div class="emoji">🔍</div>  
+            <p>没有找到相关工具，试试其他关键词？</p>  
+        </div>  
+  
+        <!-- 页脚 -->  
+        <footer>  
+            <div class="footer-links">  
+                <a href="#">📱 关注公众号</a>  
+                <a href="#">💬 加入社群</a>  
+                <a href="#">📮 推荐工具</a>  
+            </div>  
+            <p>© 2025 AI效率局 · 我替你试错，你只管提效</p>  
+            <p style="margin-top:8px; font-size:12px;">工具信息仅供参考，请以官网为准 · 持续更新中</p>  
+        </footer>  
+    </div>  
+  
+    <!-- 回到顶部 -->  
+    <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>  
+  
+    <script>  
+        // ===== 工具数据库 =====  
+        const tools = [  
+            // === AI对话 ===  
+            {  
+                name: "ChatGPT",  
+                category: "chat",  
+                desc: "OpenAI出品的现象级AI对话模型，全球最流行的AI助手，支持文字、图片、代码等多模态交互。",  
+                url: "https://chat.openai.com",  
+                emoji: "🤖",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Claude",  
+                category: "chat",  
+                desc: "Anthropic出品，擅长长文本理解和深度分析，写作能力极强，代码能力出色。",  
+                url: "https://claude.ai",  
+                emoji: "🧠",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Kimi（月之暗面）",  
+                category: "chat",  
+                desc: "国产最强AI对话助手，支持20万字长文本处理，中文理解能力一流，可上传文档分析。",  
+                url: "https://kimi.moonshot.cn",  
+                emoji: "🌙",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "文心一言",  
+                category: "chat",  
+                desc: "百度出品的AI对话助手，深度整合百度搜索生态，中文理解能力强，支持多模态。",  
+                url: "https://yiyan.baidu.com",  
+                emoji: "📝",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "通义千问",  
+                category: "chat",  
+                desc: "阿里巴巴出品，支持文本、图像、音频多模态交互，与阿里云生态深度整合。",  
+                url: "https://tongyi.aliyun.com",  
+                emoji: "🔮",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "豆包",  
+                category: "chat",  
+                desc: "字节跳动出品的AI助手，对话自然流畅，集成写作、翻译、编程等功能，上手门槛低。",  
+                url: "https://www.doubao.com",  
+                emoji: "🫘",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "DeepSeek",  
+                category: "chat",  
+                desc: "深度求索出品，推理能力极强，性价比王者，开源模型表现惊艳，API价格极低。",  
+                url: "https://chat.deepseek.com",  
+                emoji: "🔬",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "Gemini",  
+                category: "chat",  
+                desc: "Google出品的多模态AI，原生支持图文视频理解，深度整合Google生态系统。",  
+                url: "https://gemini.google.com",  
+                emoji: "💎",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+  
+            // === AI绘画 ===  
+            {  
+                name: "Midjourney",  
+                category: "image",  
+                desc: "全球最受欢迎的AI绘画工具，画面质量天花板，艺术性极强，适合设计和创意领域。",  
+                url: "https://midjourney.com",  
+                emoji: "🎨",  
+                tags: ["付费"],  
+                china: false,  
+                free: false  
+            },  
+            {  
+                name: "即梦AI（Dreamina）",  
+                category: "image",  
+                desc: "字节跳动出品，支持AI生图+图生视频，中文提示词支持好，免费额度充足，国内直接用。",  
+                url: "https://jimeng.jianying.com",  
+                emoji: "🌈",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "DALL·E 3",  
+                category: "image",  
+                desc: "OpenAI出品，集成在ChatGPT中，自然语言理解能力强，文字渲染能力突出。",  
+                url: "https://chat.openai.com",  
+                emoji: "🖼️",  
+                tags: ["含在ChatGPT Plus中"],  
+                china: false,  
+                free: false  
+            },  
+            {  
+                name: "Stable Diffusion",  
+                category: "image",  
+                desc: "开源AI绘画模型，可本地部署，完全免费，自定义程度极高，社区生态丰富。",  
+                url: "https://stability.ai",  
+                emoji: "🌀",  
+                tags: ["免费开源"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Ideogram",  
+                category: "image",  
+                desc: "AI绘画中文字渲染最强的工具，海报、Logo设计利器，免费额度足够日常使用。",  
+                url: "https://ideogram.ai",  
+                emoji: "✏️",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "通义万相",  
+                category: "image",  
+                desc: "阿里出品的AI绘画工具，中文提示词优化好，免费使用，支持多种风格切换。",  
+                url: "https://wanxiang.aliyun.com",  
+                emoji: "🏮",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+  
+            // === AI视频 ===  
+            {  
+                name: "可灵AI（Kling）",  
+                category: "video",  
+                desc: "快手出品的AI视频生成工具，国产天花板，支持文生视频、图生视频，效果惊艳。",  
+                url: "https://klingai.kuaishou.com",  
+                emoji: "🎥",  
+                tags: ["有免费额度"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "Runway",  
+                category: "video",  
+                desc: "全球顶级AI视频生成平台，Gen-3效果震撼，专业影视级质量，好莱坞都在用。",  
+                url: "https://runwayml.com",  
+                emoji: "🎬",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Pika",  
+                category: "video",  
+                desc: "简单好用的AI视频工具，上手快，特效功能丰富，适合社交媒体短视频创作。",  
+                url: "https://pika.art",  
+                emoji: "⚡",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "HeyGen",  
+                category: "video",  
+                desc: "AI数字人视频生成平台，输入文字自动生成真人说话视频，支持多语言，视频翻译利器。",  
+                url: "https://heygen.com",  
+                emoji: "🧑‍💼",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Vidu",  
+                category: "video",  
+                desc: "生数科技出品的国产AI视频工具，支持文生视频和图生视频，中文提示词友好。",  
+                url: "https://www.vidu.com",  
+                emoji: "📹",  
+                tags: ["有免费额度"],  
+                china: true,  
+                free: true  
+            },  
+  
+            // === AI写作 ===  
+            {  
+                name: "Notion AI",  
+                category: "write",  
+                desc: "Notion内置AI助手，支持写作、总结、翻译、头脑风暴，与笔记系统完美融合。",  
+                url: "https://notion.so",  
+                emoji: "📓",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Jasper",  
+                category: "write",  
+                desc: "专业AI营销文案工具，适合写广告文案、社交媒体帖子、博客文章，营销人必备。",  
+                url: "https://jasper.ai",  
+                emoji: "💎",  
+                tags: ["付费"],  
+                china: false,  
+                free: false  
+            },  
+            {  
+                name: "写作猫",  
+                category: "write",  
+                desc: "国产AI写作助手，支持文章续写、改写、扩写，中文写作优化，自媒体创作利器。",  
+                url: "https://xiezuocat.com",  
+                emoji: "🐱",  
+                tags: ["免费+付费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "Copy.ai",  
+                category: "write",  
+                desc: "AI营销文案生成器，支持多种文案模板，适合做广告、邮件、社交媒体营销内容。",  
+                url: "https://copy.ai",  
+                emoji: "📋",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+  
+            // === AI编程 ===  
+            {  
+                name: "Cursor",  
+                category: "code",  
+                desc: "AI驱动的代码编辑器，用自然语言描述需求就能写代码，非程序员也能建网站做工具。",  
+                url: "https://cursor.com",  
+                emoji: "💻",  
+                tags: ["有试用期"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "GitHub Copilot",  
+                category: "code",  
+                desc: "GitHub官方AI编程助手，实时代码补全和建议，程序员生产力倍增器。",  
+                url: "https://github.com/features/copilot",  
+                emoji: "🐙",  
+                tags: ["付费"],  
+                china: false,  
+                free: false  
+            },  
+            {  
+                name: "Bolt.new",  
+                category: "code",  
+                desc: "在线AI建站工具，输入描述自动生成完整网站，可一键部署上线，零代码基础可用。",  
+                url: "https://bolt.new",  
+                emoji: "⚡",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "v0 by Vercel",  
+                category: "code",  
+                desc: "Vercel出品的AI前端开发工具，用自然语言生成UI组件和页面，设计感极强。",  
+                url: "https://v0.dev",  
+                emoji: "🔷",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Replit Agent",  
+                category: "code",  
+                desc: "在线AI编程平台，对话式开发，从构思到部署一站式完成，支持多种编程语言。",  
+                url: "https://replit.com",  
+                emoji: "🔧",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+  
+            // === AI办公 ===  
+            {  
+                name: "Gamma",  
+                category: "office",  
+                desc: "AI一键生成PPT/演示文稿，输入主题自动生成带内容、排版、配图的完整幻灯片。",  
+                url: "https://gamma.app",  
+                emoji: "📊",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Napkin AI",  
+                category: "office",  
+                desc: "文字自动转可视化图表，把复杂内容变成精美的信息图、流程图、思维导图。",  
+                url: "https://napkin.ai",  
+                emoji: "📐",  
+                tags: ["免费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "NotebookLM",  
+                category: "office",  
+                desc: "Google出品的AI研究助手，上传文档自动生成笔记和问答，还能生成播客，学习神器。",  
+                url: "https://notebooklm.google.com",  
+                emoji: "📒",  
+                tags: ["免费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "ChatPDF",  
+                category: "office",  
+                desc: "上传PDF直接与文档对话，快速提取关键信息，论文阅读和文档分析利器。",  
+                url: "https://chatpdf.com",  
+                emoji: "📄",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "飞书智能伙伴",  
+                category: "office",  
+                desc: "飞书内置AI助手，支持智能摘要、会议纪要自动生成、多维表格AI分析，企业协作首选。",  
+                url: "https://www.feishu.cn",  
+                emoji: "🕊️",  
+                tags: ["免费+付费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "AiPPT",  
+                category: "office",  
+                desc: "国产AI做PPT工具，中文支持优秀，模板丰富，一键生成+自由编辑，上手极快。",  
+                url: "https://www.aippt.cn",  
+                emoji: "🎯",  
+                tags: ["有免费额度"],  
+                china: true,  
+                free: true  
+            },  
+  
+            // === AI搜索 ===  
+            {  
+                name: "Perplexity",  
+                category: "search",  
+                desc: "AI搜索引擎，直接给答案而不是链接，每个回答都标注信息来源，搜索界的革命者。",  
+                url: "https://perplexity.ai",  
+                emoji: "🔍",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "秘塔AI搜索",  
+                category: "search",  
+                desc: "国产AI搜索引擎，无需翻墙，搜索结果结构化呈现，信息来源清晰，Perplexity平替。",  
+                url: "https://metaso.cn",  
+                emoji: "🏛️",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "天工AI搜索",  
+                category: "search",  
+                desc: "昆仑万维出品的AI搜索，支持实时联网搜索，回答附带来源链接，中文搜索体验好。",  
+                url: "https://tiangong.cn",  
+                emoji: "⛩️",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            },  
+  
+            // === AI设计 ===  
+            {  
+                name: "Canva AI",  
+                category: "design",  
+                desc: "Canva集成AI功能，一键生成设计、AI换背景、AI文案，非设计师也能做出专业级作品。",  
+                url: "https://canva.com",  
+                emoji: "🎨",  
+                tags: ["免费+付费"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "即时设计 AI",  
+                category: "design",  
+                desc: "国产在线设计工具，AI生成UI设计稿，支持Figma文件导入，国内设计师必备。",  
+                url: "https://js.design",  
+                emoji: "✨",  
+                tags: ["免费+付费"],  
+                china: true,  
+                free: true  
+            },  
+            {  
+                name: "Removebg",  
+                category: "design",  
+                desc: "AI一键抠图，上传图片自动去除背景，效果精准，电商和设计高频刚需工具。",  
+                url: "https://remove.bg",  
+                emoji: "✂️",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "美图AI",  
+                category: "design",  
+                desc: "美图出品的AI设计平台，AI海报、AI证件照、AI商品图，中文模板丰富，操作简单。",  
+                url: "https://www.meitu.com",  
+                emoji: "📸",  
+                tags: ["免费+付费"],  
+                china: true,  
+                free: true  
+            },  
+  
+            // === AI音乐 ===  
+            {  
+                name: "Suno",  
+                category: "music",  
+                desc: "最强AI音乐生成平台，输入歌词或描述自动生成完整歌曲（含人声），音乐创作零门槛。",  
+                url: "https://suno.com",  
+                emoji: "🎵",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "Udio",  
+                category: "music",  
+                desc: "专业AI音乐创作工具，音质和音乐性极高，支持多种音乐风格，Suno的强力竞品。",  
+                url: "https://udio.com",  
+                emoji: "🎶",  
+                tags: ["有免费额度"],  
+                china: false,  
+                free: true  
+            },  
+            {  
+                name: "天工音乐",  
+                category: "music",  
+                desc: "国产AI音乐创作平台，中文歌词理解能力强，免费使用，适合做短视频BGM和原创歌曲。",  
+                url: "https://tiangong.cn",  
+                emoji: "🎸",  
+                tags: ["免费"],  
+                china: true,  
+                free: true  
+            }  
+        ];  
+  
+        // ===== 渲染工具卡片 =====  
+        const grid = document.getElementById('toolsGrid');  
+        const noResults = document.getElementById('noResults');  
+        const searchInput = document.getElementById('searchInput');  
+        const toolCount = document.getElementById('toolCount');  
+  
+        function renderTools(filteredTools) {  
+            grid.innerHTML = '';  
+              
+            if (filteredTools.length === 0) {  
+                noResults.style.display = 'block';  
+                grid.style.display = 'none';  
+                return;  
+            }  
+  
+            noResults.style.display = 'none';  
+            grid.style.display = 'grid';  
+  
+            filteredTools.forEach((tool, index) => {  
+                const card = document.createElement('div');  
+                card.className = 'tool-card';  
+                card.style.animationDelay = `${index * 0.03}s`;  
+                card.onclick = () => window.open(tool.url, '_blank');  
+  
+                const tagClass = `tag-${tool.category}`;  
+                const bgClass = `bg-${tool.category}`;  
+                const categoryNames = {  
+                    chat: 'AI对话', image: 'AI绘画', video: 'AI视频',  
+                    write: 'AI写作', code: 'AI编程', office: 'AI办公',  
+                    search: 'AI搜索', design: 'AI设计', music: 'AI音乐'  
+                };  
+  
+                card.innerHTML = `  
+                    <div class="tool-header">  
+                        <div class="tool-emoji ${bgClass}">${tool.emoji}</div>  
+                        <div>  
+                            <div class="tool-name">${tool.name}</div>  
+                            <span class="tool-tag ${tagClass}">${categoryNames[tool.category]}</span>  
+                        </div>  
+                    </div>  
+                    <div class="tool-desc">${tool.desc}</div>  
+                    <div class="tool-footer">  
+                        <div class="tool-badges">  
+                            ${tool.free ? '<span class="badge free">✓ 免费可用</span>' : '<span class="badge">付费</span>'}  
+                            ${tool.china ? '<span class="badge china">🇨🇳 国产</span>' : ''}  
+                        </div>  
+                        <a href="${tool.url}" target="_blank" class="visit-btn" onclick="event.stopPropagation()">访问 →</a>  
+                    </div>  
+                `;  
+  
+                grid.appendChild(card);  
+            });  
+        }  
+  
+        // ===== 分类筛选 =====  
+        let currentCategory = 'all';  
+  
+        document.getElementById('categories').addEventListener('click', (e) => {  
+            if (!e.target.classList.contains('cat-btn')) return;  
+  
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));  
+            e.target.classList.add('active');  
+  
+            currentCategory = e.target.dataset.category;  
+            filterAndRender();  
+        });  
+  
+        // ===== 搜索功能 =====  
+        searchInput.addEventListener('input', () => {  
+            filterAndRender();  
+        });  
+  
+        function filterAndRender() {  
+            const query = searchInput.value.toLowerCase().trim();  
+            let filtered = tools;  
+  
+            if (currentCategory !== 'all') {  
+                filtered = filtered.filter(t => t.category === currentCategory);  
+            }  
+  
+            if (query) {  
+                filtered = filtered.filter(t =>   
+                    t.name.toLowerCase().includes(query) ||  
+                    t.desc.toLowerCase().includes(query) ||  
+                    t.category.toLowerCase().includes(query)  
+                );  
+            }  
+  
+            renderTools(filtered);  
+        }  
+  
+        // ===== 回到顶部按钮 =====  
+        window.addEventListener('scroll', () => {  
+            const btn = document.getElementById('backTop');  
+            btn.style.display = window.scrollY > 500 ? 'flex' : 'none';  
+        });  
+  
+        // ===== 初始化 =====  
+        toolCount.textContent = tools.length;  
+        renderTools(tools);  
+    </script>  
+</body>  
+</html>  
